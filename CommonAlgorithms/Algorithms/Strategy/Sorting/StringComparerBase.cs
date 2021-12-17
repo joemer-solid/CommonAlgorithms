@@ -44,11 +44,8 @@
             {
                 if (lowerPositionCompare == upperPositionCompare)
                 {
-                    compareResult = CompareResult.Equal;
-                    if(characterPosition < lowerPosition.Length - 1)
-                    {
-                        CharacterPositionCompare(lowerPosition, upperPosition, characterPosition + 1);
-                    }
+                    compareResult = CompareResult.Equal;                   
+                    CharacterPositionCompare(lowerPosition, upperPosition, characterPosition + 1);                   
                 }
                 else if (lowerPositionCompare > upperPositionCompare)
                 {
