@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -6,31 +7,33 @@ namespace Algorithms.Strategy.Sorting
 {
     public sealed class TextualSort : ITextualSort
     {
-        private ComparerBase<string> _sortComparer;
-
+      
         IEnumerable<string> ISort<IEnumerable<string>, TextualSortParams>.Execute(TextualSortParams p)
         {
-            _sortComparer = GetSortComparer(p);
-
+            ComparerBase<string> sortComparer = GetSortComparer(p);
+            
             string[] textList = p.ItemsToSort.ToArray<string>();
 
             for (int i = 0; i <= textList.Length - 1; i++)
             {
                 for (int j = i + 1; j <= textList.Length - 1; j++)
                 {
-                    string swapBookmark = string.Empty;
-
-                    if (_sortComparer.SwapValues(textList[i], textList[j]))
+                    if (sortComparer.SwapValues(textList[i], textList[j]))
                     {
-                        swapBookmark = textList[i];
+                        string swapBookmark = textList[i];
                         textList[i] = textList[j];
                         textList[j] = swapBookmark;
                     }
+                }  
+
+                if(OkToShortCircuit(sortComparer, textList))
+                {
+                    Console.WriteLine($"short circuiting on iteration: {i}");
+                    break;
                 }
             }
 
             return textList;
-
         }
 
         private ComparerBase<string> GetSortComparer(TextualSortParams sortParams)
@@ -41,12 +44,21 @@ namespace Algorithms.Strategy.Sorting
             }
             else if (sortParams.Direction == SortParams<string>.SortDirection.Descending)
             {
-               return new DescendingOrderStringComparer(sortParams.CompareType);
+                return new DescendingOrderStringComparer(sortParams.CompareType);
             }
 
             return null;
-        }
-            
+        } 
+
+        private static bool OkToShortCircuit(ComparerBase<string> sortComparer, string[] currentSort)
+        {           
+            bool[] comparisonResultsPerElement = new bool[currentSort.Length];
+
+            for (int i = 0; i < currentSort.Length - 1; i++)
+               comparisonResultsPerElement[i] = sortComparer.SwapValues(currentSort[i], currentSort[i + 1]);  
+           
+            return comparisonResultsPerElement.All(x => x == false);
+        }            
     }
 
     public sealed class TextualSortParams : SortParams<string>
@@ -59,4 +71,5 @@ namespace Algorithms.Strategy.Sorting
         Strict,
         Fuzzy
     }
+
 }

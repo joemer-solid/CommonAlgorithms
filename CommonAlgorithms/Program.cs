@@ -9,15 +9,15 @@ namespace Algorithms
     {
         static void Main(string[] args)
         {
-            SortNumbersArray( new int[] { 8, 10, 5, 3, 2, 1, 0, 95,33, 41, 15, 98, 77, 4, 6 });
+            //SortNumbersArray( new int[] { 8, 10, 5, 3, 2, 1, 0, 95,33, 41, 15, 98, 77, 4, 6 });
 
-            StrictSortTextArrayAscending(new string[] { "Union", "unicorn", "Hedgerow", "Penultimate", "Apogee", "Nadir", "Cotillion" });
+            StrictSortTextArrayAscending(new string[] { "Xylophone", "Zephyr", "Union", "unicorn", "cutaneous", "Hedgerow", "Penultimate", "Apogee", "Nadir", "Cotillion", "histrionics", "cut", "Apoplectic", "Circadian" });
 
             StrictSortTextArrayDescending(new string[] { "Union", "unicorn", "Hedgerow", "Penultimate", "Apogee", "Nadir", "Cotillion" });
 
-            SearchForNumber(new int[] { 8, 10, 5, 3, 2, 1, 0, 95, 33, 41, 15, 98, 77, 4, 6 }, 77);
+            //SearchForNumber(new int[] { 8, 10, 5, 3, 2, 1, 0, 95, 33, 41, 15, 98, 77, 4, 6 }, 77);
 
-            SearchForNumber(new int[] { 8, 10, 5, 3, 2, 1, 0, 95, 33, 41, 15, 98, 77, 4, 6 }, 17);
+           // SearchForNumber(new int[] { 8, 10, 5, 3, 2, 1, 0, 95, 33, 41, 15, 98, 77, 4, 6 }, 17);
 
             Console.ReadLine();
 
@@ -89,8 +89,7 @@ namespace Algorithms
         {
             Console.WriteLine(string.Format("************{0}************{1}", typeOfSort, Environment.NewLine));
 
-            Action<T> writeLine = null;
-
+            Action<T> writeLine;
             if (typeof(T) != typeof(string))
             {
                writeLine = (x) => { Console.WriteLine(x.ToString()); };
