@@ -31,13 +31,13 @@ namespace DayOfWeekCalculator
             for (int i = 1; i <= dateInformationForYear.MonthDaysInMonth.GetLength(0); i++)
             {
                 if (month == dateInformationForYear.MonthDaysInMonth[i - 1, MONTH])
-                {
-                    dayOfYear = dayOfYear += day;
+                {                  
+                    dayOfYear += day;
                     break;
                 }
                 else
-                {
-                    dayOfYear = dayOfYear += dateInformationForYear.MonthDaysInMonth[i - 1, DAYOFMONTH];
+                {                   
+                    dayOfYear += dateInformationForYear.MonthDaysInMonth[i - 1, DAYOFMONTH];
                 }
             }
 
