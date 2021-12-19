@@ -6,27 +6,38 @@ namespace DayOfWeekCalculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter Month Day Year.. then [Enter] to begin...");
-            Console.WriteLine();
+            const string QUIT_KEY = "q";
+            bool quitFlag = false;
+            while (!quitFlag)
+            {
+                Console.WriteLine($"Press {QUIT_KEY} to quit {Environment.NewLine}");
 
-            string input = Console.ReadLine();
-            string[] inputParams = input.Split(' ');
+                Console.WriteLine($"Enter Month Day Year.. then [Enter] to begin...{Environment.NewLine}");
+              
+                string input = Console.ReadLine();
 
-            int month = Convert.ToInt32(inputParams[0]);
-            int day = Convert.ToInt32(inputParams[1]);
-            int year = Convert.ToInt32(inputParams[2]);
+                if (input.ToLower().Equals(QUIT_KEY,StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }             
 
-            if(month > 12) { throw new ArgumentOutOfRangeException(nameof(month)); }
-            if(year < DateInformationList.MinYear || year > DateInformationList.MinYear + DateInformationList.YearSpan) 
-            { throw new ArgumentOutOfRangeException(nameof(year));  }
+                string[] inputParams = input.Split(' ');
 
-            //expected day, month, year
-            Console.WriteLine(
-                DateInformationList.GetDayOfWeekForInputDate(day,
-                month,
-                year));
+                int month = Convert.ToInt32(inputParams[0]);
+                int day = Convert.ToInt32(inputParams[1]);
+                int year = Convert.ToInt32(inputParams[2]);
 
-            Console.Read();
+                if (month > 12) { throw new ArgumentOutOfRangeException(nameof(month)); }
+                if (year < DateInformationList.MinYear || year > DateInformationList.MinYear + DateInformationList.YearSpan)
+                { throw new ArgumentOutOfRangeException(nameof(year)); }
+
+                //expected day, month, year
+                Console.WriteLine(
+                    DateInformationList.GetDayOfWeekForInputDate(day,
+                    month,
+                    year));
+               
+            }           
         }
     }
 }
