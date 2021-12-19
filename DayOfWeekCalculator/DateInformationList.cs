@@ -6,8 +6,8 @@ namespace DayOfWeekCalculator
 {
     internal class DateInformationList
     {
-        private static readonly int MinYear = 2000;
-        private static readonly int YearSpan = 2024 - MinYear;
+        public static readonly int MinYear = 2000;
+        public static readonly int YearSpan = 2024 - MinYear;
         private static readonly int FirstWeekDayInMinYear = 6;
 
 

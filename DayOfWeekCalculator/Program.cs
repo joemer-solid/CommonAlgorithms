@@ -17,7 +17,8 @@ namespace DayOfWeekCalculator
             int year = Convert.ToInt32(inputParams[2]);
 
             if(month > 12) { throw new ArgumentOutOfRangeException(nameof(month)); }
-            if(year < 1900 || year > 2024) { throw new ArgumentOutOfRangeException(nameof(year));  }
+            if(year < DateInformationList.MinYear || year > DateInformationList.MinYear + DateInformationList.YearSpan) 
+            { throw new ArgumentOutOfRangeException(nameof(year));  }
 
             //expected day, month, year
             Console.WriteLine(
