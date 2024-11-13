@@ -6,9 +6,9 @@ namespace DayOfWeekCalculator
 {
     internal class DateInformationList
     {
-        public static readonly int MinYear = 2000;
+        public static readonly int MinYear = 1990;
         public static readonly int YearSpan = 2024 - MinYear;
-        private static readonly int FirstWeekDayInMinYear = 6;
+        private static readonly int FirstWeekDayInMinYear = 1;
 
 
         static DateInformationList()
@@ -143,6 +143,15 @@ namespace DayOfWeekCalculator
                     "Friday",
                     "Saturday",
                     "Sunday"};
+
+                //string[] daysOfWeek = new string[]
+                //    {"Sunday",
+                //     "Monday",
+                //    "Tuesday",
+                //    "Wednesday",
+                //    "Thursday",
+                //    "Friday",
+                //    "Saturday"};
 
                 return daysOfWeek[dayOfWeekNumber - 1];
             }

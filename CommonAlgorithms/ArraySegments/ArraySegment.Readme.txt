@@ -1,0 +1,9 @@
+ArraySegment<T>
+
+1. You can pass an ArraySegment<T> object that represents only a portion of an array as an argument to a method, 
+rather than call a relatively expensive method like Copy to pass a copy of a portion of an array.
+
+2. In a multithreaded app, you can use the ArraySegment<T> structure to have each thread operate on only a portion of the array.
+
+3. async file read
+https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/using-async-for-file-access
