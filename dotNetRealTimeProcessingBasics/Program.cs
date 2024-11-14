@@ -5,6 +5,7 @@ using dotNetRealTimeProcessingBasics.Shared;
 using dotNetRealTimeProcessingBasics.StackAllocation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection.Metadata.Ecma335;
 
 namespace dotNetRealTimeProcessingBasics
 {
@@ -16,15 +17,13 @@ namespace dotNetRealTimeProcessingBasics
         static void Main(string[] args)
         {
             ServiceCollection services = new();
-            services.AddTransient<IBasicArrayPooling, BasicArrayPoolingService>();
+           
             services.AddTransient<IBasicMemoryPooling, BasicMemoryPoolingService>();
-            services.AddTransient<IBasicStackAllocation, BasicStackAllocationService>();
-            services.AddSingleton<BasicArrayPoolingTester>();
+            services.AddTransient<IBasicStackAllocation, BasicStackAllocationService>();          
             services.AddSingleton<BasicMemoryPoolingTester>();
             services.AddSingleton<BasicStackAllocationTester>();   
 
             var serviceProvider = services.BuildServiceProvider();
-            var basicArrayPoolTester = serviceProvider.GetService<BasicArrayPoolingTester>();
             var basicMemoryPoolTester = serviceProvider.GetService<BasicMemoryPoolingTester>();
             var basicStackAllocationTester = serviceProvider.GetService<BasicStackAllocationTester>();
 
@@ -32,12 +31,14 @@ namespace dotNetRealTimeProcessingBasics
             string memoryPoolTestInput = "Welcome to the exciting world of real-time features in .NET Core applications! In today's digital landscape, users expect instant updates and seamless interactions.";
             string stackAllocTestInput = "stackalloc - Returns a Span<T> and is not allocated on the heap so no GC takes place. Span allocations cannot be returned outside the method scope.";
 
+            BasicArrayPoolingTester basicArrayPoolTester = new(new BasicArrayPoolingService());
+
             Task.Run(async () =>
             {
-                 await basicArrayPoolTester!.TransformStringToByteArray(arrayPoolTesterInput);
-                 await basicMemoryPoolTester!.TransformStringToByteArray(memoryPoolTestInput);
-                 await basicStackAllocationTester!.TransformStringToByteArray(stackAllocTestInput);
-
+                await basicArrayPoolTester!.TransformStringToByteArray(arrayPoolTesterInput);
+                await basicArrayPoolTester!.PerformantTransformStringToByteArray(arrayPoolTesterInput);
+                await basicMemoryPoolTester!.TransformStringToByteArray(memoryPoolTestInput);
+                await basicStackAllocationTester!.TransformStringToByteArray(stackAllocTestInput);
             });
         
             Console.ReadLine();
@@ -66,6 +67,13 @@ namespace dotNetRealTimeProcessingBasics
             string testId = $"{Environment.NewLine}BasicArrayPoolingTester::TransformStringToByteArray Tester";
             testId.DisplayToConsole();
             await _basicArrayPooling.TransformStringToByteArray(input);
+        }
+
+        public async Task PerformantTransformStringToByteArray(string input)
+        {
+            string testId = $"{Environment.NewLine}BasicArrayPoolingTester::PerformantTransformStringToByteArray Tester";
+            testId.DisplayToConsole();
+            await _basicArrayPooling.TransformStringToByteArray(input, new ArrayPoolingPerformantSerializer());
         }
     }
 
