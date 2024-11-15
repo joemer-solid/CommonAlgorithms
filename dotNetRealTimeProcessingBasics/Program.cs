@@ -39,6 +39,16 @@ namespace dotNetRealTimeProcessingBasics
                 await basicArrayPoolTester!.PerformantTransformStringToByteArray(arrayPoolTesterInput);
                 await basicMemoryPoolTester!.TransformStringToByteArray(memoryPoolTestInput);
                 await basicStackAllocationTester!.TransformStringToByteArray(stackAllocTestInput);
+            }).ContinueWith(trunner =>
+            {
+                if(trunner.IsFaulted)
+                {
+                    Console.WriteLine(trunner.Exception.Message);
+                }
+                else if(trunner.IsCompletedSuccessfully)
+                {
+                    "Task was successfully completed!".DisplayToConsole();
+                }
             });
         
             Console.ReadLine();

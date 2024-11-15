@@ -1,4 +1,6 @@
-﻿namespace dotNetRealTimeProcessingBasics.Shared
+﻿using System;
+
+namespace dotNetRealTimeProcessingBasics.Shared
 {
     public static class ConsoleDisplayExtensionMethods
     {
@@ -8,6 +10,12 @@
             {
                 Console.WriteLine($"{Environment.NewLine}{input}");
             }
+        }
+
+        public static void DisplayToConsolePosition(this string input, int cursorLeftPosition = 0, int cursorTopPosition = -1) 
+        {           
+            Console.SetCursorPosition(cursorLeftPosition, cursorTopPosition); 
+            Console.WriteLine(input);
         }
 
         public static void DisplayToConsole(this byte[] input, string outputId)

@@ -1,4 +1,5 @@
-﻿using System.Threading.Channels;
+﻿using dotNetRealTimeProcessingBasics.Contracts;
+using System.Threading.Channels;
 
 namespace dotNetRealTimeProcessingBasics.Shared
 {
