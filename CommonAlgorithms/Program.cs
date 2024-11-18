@@ -31,6 +31,8 @@ namespace Algorithms
 
             // SearchForNumber(new int[] { 8, 10, 5, 3, 2, 1, 0, 95, 33, 41, 15, 98, 77, 4, 6 }, 17);
 
+            SearchForNumber(new int[] { 0, 1, 2, 3, 4 }, 3);
+
             //HashSet<int[]> result = AllPermutationsOf(new int[] {1,2,3,4,5});
 
             //Console.WriteLine($"Permutation Total: {result.Count}");
@@ -58,7 +60,7 @@ namespace Algorithms
 
             // await PerformAsyncFileRead();
 
-            TestToPreviousSpotPriceBusinessDateTime();
+           // TestToPreviousSpotPriceBusinessDateTime();
 
            // Console.WriteLine($"Calling HandleExceptionReturnValue: {HandleExceptionReturnValue()}");
 
